@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
   actions: {
     authenticate() {
       if (this.get('session.isAuthenticated')) {
-        const accessToken = cookies.read('access_token');
+        const accessToken = this.get('cookies').read('access_token');
         Ember.$.ajax({
           url : 'https://api.github.com/user',
           beforeSend: function (xhr) {
@@ -15,7 +15,6 @@ export default Ember.Controller.extend({
           }
         });
       } else {
-        debugger;
         this.get('session').authenticate('authenticator:torii', 'github-oauth2')
           .catch((reason) => {
             this.set('errorMessage', reason.error || reason);
