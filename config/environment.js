@@ -21,7 +21,6 @@ module.exports = function(environment) {
       providers: {
         'github-oauth2': {
           apiKey: '32b96c8ef042cebd8842',
-          redirect_uri: 'https://github-cockpit.herokuapp.com/auth-callback',
           scope: 'user'
         }
       }
