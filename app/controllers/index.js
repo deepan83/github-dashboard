@@ -2,18 +2,20 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   session: Ember.inject.service('session'),
+  cookies: Ember.inject.service(),
 
   actions: {
     authenticate() {
       if (this.get('session.isAuthenticated')) {
-        const authorizationCode = this.get('session.data.authenticated.authorizationCode');
+        const accessToken = cookies.read('access_token');
         Ember.$.ajax({
           url : 'https://api.github.com/user',
           beforeSend: function (xhr) {
-            xhr.setRequestHeader('Authorization', 'token ' + authorizationCode);
+            xhr.setRequestHeader('Authorization', 'token ' + accessToken);
           }
         });
       } else {
+        debugger;
         this.get('session').authenticate('authenticator:torii', 'github-oauth2')
           .catch((reason) => {
             this.set('errorMessage', reason.error || reason);

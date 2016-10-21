@@ -33,6 +33,7 @@
     "ember-cli-release": "0.2.8",
     "ember-cli-sri": "^2.0.0",
     "ember-cli-uglify": "^1.2.0",
+    "ember-cookies": "0.0.9",
     "ember-data": "^2.3.0",
     "ember-disable-proxy-controllers": "^1.0.1",
     "ember-export-application-global": "^1.0.4",
@@ -42,6 +43,5 @@
     "loader.js": "^4.0.0",
     "torii": "^0.8.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
