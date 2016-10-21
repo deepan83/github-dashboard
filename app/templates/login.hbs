@@ -1,0 +1,8 @@
+<form {{action 'authenticate' on='submit'}}>
+  <button type="submit">Login</button>
+  {{#if errorMessage}}
+    <p>{{errorMessage}}</p>
+  {{/if}}
+</form>
+
+{{outlet}}
