@@ -1,8 +1,15 @@
-<form {{action 'authenticate' on='submit'}}>
-  <button type="submit">Login</button>
+<form {{action 'authenticate' on='submit'}} class="login-container">
+
+  <img src="/images/Octocat.png" height="200" width="200"/>
+  <br>
+  <button type="submit" class="btn btn-primary">
+     <span class="fa fa-github" aria-hidden="true"></span> Sign in with GitHub
+  </button>
+  <br>
   {{#if errorMessage}}
     <p>{{errorMessage}}</p>
   {{/if}}
+
 </form>
 
 {{outlet}}
