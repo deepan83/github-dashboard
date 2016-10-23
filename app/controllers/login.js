@@ -6,6 +6,9 @@ export default Ember.Controller.extend({
   actions: {
     authenticate() {
       this.get('session').authenticate('authenticator:torii', 'github-oauth2')
+      .then(() => {
+        this.transitionTo('index');
+      })
       .catch((reason) => {
         this.set('errorMessage', reason.error || reason);
       });
