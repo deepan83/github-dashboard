@@ -1,4 +1,3 @@
-import DS from 'ember-data';
+import { Serializer } from 'ember-graphql-adapter';
 
-export default DS.JSONAPISerializer.extend({
-});
+export default Serializer.extend({});
