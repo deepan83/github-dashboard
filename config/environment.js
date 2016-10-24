@@ -22,7 +22,7 @@ module.exports = function(environment) {
         'github-oauth2': {
           apiKey: '32b96c8ef042cebd8842',
           redirectUri: 'https://github-cockpit.herokuapp.com/',
-          scope: 'user repo'
+          scope: 'user,repo'
         }
       }
     }
