@@ -12,7 +12,7 @@ export default GraphQLAdapter.extend({
     };
   }),
 
-  request() {
+  request(store, type, options) {
     let compiledQuery = this.compile(store, type, options);
     let url = this.endpoint;
     let ajaxOpts = this.ajaxOptions(url, JSON.stringify({ query: compiledQuery }));
