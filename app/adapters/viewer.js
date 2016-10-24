@@ -10,5 +10,13 @@ export default GraphQLAdapter.extend({
     return {
       Authorization
     };
-  })
+  }),
+
+  request() {
+    let compiledQuery = this.compile(store, type, options);
+    let url = this.endpoint;
+    let ajaxOpts = this.ajaxOptions(url, JSON.stringify({ query: compiledQuery }));
+    return this.ajax(ajaxOpts);
+  }
+
 });
