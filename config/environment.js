@@ -35,6 +35,13 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.torii.providers = {
+      'github-oauth2': {
+        apiKey: '03ca4a94cb48d2d6a95a',
+        redirectUri: 'http://127.0.0.1:4200/',
+        scope: 'user,repo,read:org'
+      }
+    }
   }
 
   if (environment === 'test') {
