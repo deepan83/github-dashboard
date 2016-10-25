@@ -17,6 +17,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     //     console.log(err);
     //   });
 
-    return this.store.queryRecord('viewer');
+    return this.store.queryRecord('viewer', {});
   }
 });
