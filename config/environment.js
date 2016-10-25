@@ -7,6 +7,7 @@ module.exports = function(environment) {
     baseURL: '/',
     locationType: 'auto',
     EmberENV: {
+      apiBaseUrl: 'https://api.github.com',
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
         // e.g. 'with-controller': true
@@ -22,7 +23,7 @@ module.exports = function(environment) {
         'github-oauth2': {
           apiKey: '32b96c8ef042cebd8842',
           redirectUri: 'https://github-cockpit.herokuapp.com/',
-          scope: 'user'
+          scope: 'user,repo,read:org'
         }
       }
     }
