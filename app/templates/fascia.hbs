@@ -1,7 +1,9 @@
 <div class="container">
   <h2> Hello {{model.login}}! </h2>
+
+  {{#link-to 'pull-requests'}}Pull-Requests{{/link-to}}
+
 </div>
 
-{{#link-to 'pull-requests'}}Pull-Requests{{/link-to}}
 
 {{outlet}}
