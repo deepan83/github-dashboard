@@ -42,7 +42,9 @@
     "ember-load-initializers": "^0.5.0",
     "ember-resolver": "^2.0.3",
     "ember-simple-auth": "1.1.0",
+    "ember-websockets": "6.0.0",
     "loader.js": "^4.0.0",
+    "mock-socket": "5.0.1",
     "torii": "^0.8.0"
   },
   "dependencies": {}
