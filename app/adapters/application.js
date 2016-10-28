@@ -1,4 +1,5 @@
 import GraphQLAdapter from 'ember-graphql-adapter';
+import Compiler from 'github-dashboard/graphql-adapter/compiler';
 
 export default GraphQLAdapter.extend({
   session: Ember.inject.service(),
@@ -17,6 +18,11 @@ export default GraphQLAdapter.extend({
     let url = this.endpoint;
     let ajaxOpts = this.ajaxOptions(url, JSON.stringify({ query: compiledQuery }));
     return this.ajax(ajaxOpts);
-  }
+  },
+
+  compile: function(store, type, options) {
+   options['normalizeCaseFn'] = this.normalizeCase;
+   return Compiler.compile(type, store, options);
+ },
 
 });

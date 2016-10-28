@@ -1,5 +1,30 @@
 <div class="container">
-  <h2> Pull Requests{{model.login}}! </h2>
+<h2>Open Pull Requests</h2>
+
+{{#each model as |repo|}}
+  <h3>{{repo.name}}</h3>
+  <table class="table table-striped pull-requests">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Author</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each repo.pullRequests as |pullRequest|}}
+        <tr>
+         <td>{{pullRequest.number}}</td>
+         <td><a href={{pullRequest.url}}>{{pullRequest.title}}</a></td>
+         <td>{{pullRequest.user.login}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+  <br>
+  <br>
+{{/each}}
+
 </div>
 
 {{outlet}}

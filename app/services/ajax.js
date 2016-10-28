@@ -8,7 +8,6 @@ export default AjaxService.extend({
     get() {
       let headers = {};
       const accessToken = this.get('session.data.authenticated.accessToken');
-      debugger;
 
       if (accessToken) {
         headers['Authorization'] = `token ${accessToken}`;

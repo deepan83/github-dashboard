@@ -5,3 +5,7 @@
   align-items: center;
   min-height: 400px;
 }
+
+table.pull-requests {
+  table-layout: fixed;
+}

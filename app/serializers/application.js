@@ -4,5 +4,8 @@ export default Serializer.extend({
   serialize(snapshot, options) {
     debugger;
     this._super();
+  },
+  normalizePayload() {
+    debugger;
   }
 });
