@@ -12,7 +12,7 @@ export default Ember.Route.extend({
 
     pullRequestPromises = repositories.map((repository) => {
       return ajax
-        .request(`https://api.github.com/repos/ConnectedHomes/${repository}/pulls`);
+        .request(`https://api.github.com/search/issues?q=is:pr label:enhancement repo:ConnectedHomes/${repository}`);
     });
 
     const socket = this.get('socketIOService').socketFor('https://github-cockpit.herokuapp.com/');
@@ -28,6 +28,6 @@ export default Ember.Route.extend({
 
   onMessage() {
     const flashMessages = this.get('flashMessages');
-    flashMessages.info('Pull request state change!');
+    flashMessages.info('Pull request state!');
   }
 });
