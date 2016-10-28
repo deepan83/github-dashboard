@@ -2,7 +2,9 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   ajax: Ember.inject.service(),
+  flashMessages: Ember.inject.service(),
   socketIOService: Ember.inject.service('socket-io'),
+
   model() {
     const repositories = ['oam', 'bg-gaq-and-checkout', 'bg-home-services', 'home-move', 'retention', 'hi'];
     const ajax = this.get('ajax');
@@ -25,6 +27,7 @@ export default Ember.Route.extend({
   },
 
   onMessage() {
-    console.log('hello!!!!!');
+    const flashMessages = this.get('flashMessages');
+    flashMessages.info('Pull request state change!');
   }
 });
