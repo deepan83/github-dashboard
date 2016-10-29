@@ -12,7 +12,7 @@ export default Ember.Route.extend({
 
     pullRequestPromises = repositories.map((repository) => {
       return ajax
-        .request(`https://api.github.com/search/issues?q=is:pr label:enhancement repo:ConnectedHomes/${repository}`);
+        .request(`https://api.github.com/search/issues?q=is:pr label:"Ready to merge" state:open repo:ConnectedHomes/${repository}`);
     });
 
     const socket = this.get('socketIOService').socketFor('https://github-cockpit.herokuapp.com/');
@@ -20,8 +20,8 @@ export default Ember.Route.extend({
 
     return new Ember.RSVP.map(pullRequestPromises, (pullRequests) => {
       return {
-        name: pullRequests.get('firstObject.head.repo.name'),
-        pullRequests,
+        name: pullRequests.items,
+        pullRequests: pullRequests.items,
       };
     });
   },
