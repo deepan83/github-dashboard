@@ -26,8 +26,7 @@ export default Ember.Route.extend({
     });
   },
 
-  onMessage() {
-    const flashMessages = this.get('flashMessages');
-    flashMessages.info('Pull request state!');
+  onMessage(event) {
+    console.log('onMessage ' + event.data);
   }
 });
