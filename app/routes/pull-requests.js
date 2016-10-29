@@ -16,7 +16,7 @@ export default Ember.Route.extend({
     });
 
     const socket = this.get('socketIOService').socketFor('https://github-cockpit.herokuapp.com/');
-    socket.on('message', this.onMessage, this);
+    socket.on('pullRequestUpdate', this.onPullRequestUpdate, this);
 
     return new Ember.RSVP.map(pullRequestPromises, (pullRequests) => {
       return {
@@ -26,7 +26,7 @@ export default Ember.Route.extend({
     });
   },
 
-  onMessage(event) {
-    console.log('onMessage ' + event.data);
+  onPullRequestUpdate(event) {
+    console.log('onPullRequestUpdate ' + event.data);
   }
 });
