@@ -17,7 +17,7 @@ export default Ember.Route.extend({
     });
 
     // Setup socket
-    socket.on('message', this.onPullRequestUpdate, this);
+    socket.on('pullRequestUpdate', this.onPullRequestUpdate, this);
 
     return new Ember.RSVP.map(pullRequestPromises, (pullRequests) => {
       return {
@@ -31,7 +31,6 @@ export default Ember.Route.extend({
     const model = this.modelFor(this.routeName);
     const pullRequests = [].concat(...model.mapBy('pullRequests'));
 
-
-    console.log('onMessage ' + event);
+    console.log(JSON.parse(event));
   }
 });
