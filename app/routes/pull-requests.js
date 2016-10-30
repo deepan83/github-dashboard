@@ -20,17 +20,36 @@ export default Ember.Route.extend({
     socket.on('pullRequestUpdate', this.onPullRequestUpdate, this);
 
     return new Ember.RSVP.map(pullRequestPromises, (pullRequests) => {
-      return {
-        name: pullRequests.items,
-        pullRequests: pullRequests.items,
-      };
+      if (pullRequests.items.length) {
+        const repositoryUrl = pullRequests.items[0].repository_url;
+        const repositoryName = repositoryUrl.substr(repositoryUrl.lastIndexOf('/') + 1);
+
+        return {
+          name: repositoryName,
+          pullRequests: pullRequests.items,
+        };
+      } else {
+        return null;
+      }
+    })
+    .then((pullRequests) => {
+      return pullRequests.compact();
     });
   },
 
-  onPullRequestUpdate(event) {
+  onPullRequestUpdate(pullRequest) {
     const model = this.modelFor(this.routeName);
-    const pullRequests = [].concat(...model.mapBy('pullRequests'));
+    const pullRequestJSON = JSON.parse(pullRequest);
+    const pullRequestsForRepository = model.findBy('name', pullRequestJSON.head.repo.name).pullRequests;
 
-    console.log(JSON.parse(event));
+    if (pullRequestsForRepository.length) {
+      const matchingPullRequest = pullRequestsForRepository.findBy('number', pullRequestJSON.number);
+
+      if (matchingPullRequest) {
+        pullRequestsForRepository.removeObject(matchingPullRequest);
+      } else {
+        pullRequestsForRepository.pushObject(pullRequestJSON);
+      }
+    }
   }
 });
