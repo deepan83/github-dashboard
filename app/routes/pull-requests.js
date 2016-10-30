@@ -8,6 +8,7 @@ export default Ember.Route.extend({
   model() {
     const repositories = ['oam', 'bg-gaq-and-checkout', 'bg-home-services', 'home-move', 'retention', 'hi'];
     const ajax = this.get('ajax');
+    const socket = this.get('socketIOService').socketFor('https://github-cockpit.herokuapp.com/');
     let pullRequestPromises;
 
     pullRequestPromises = repositories.map((repository) => {
@@ -15,8 +16,8 @@ export default Ember.Route.extend({
         .request(`https://api.github.com/search/issues?q=is:pr label:"Ready to merge" state:open repo:ConnectedHomes/${repository}`);
     });
 
-    const socket = this.get('socketIOService').socketFor('https://github-cockpit.herokuapp.com/');
-    socket.on('pullRequestUpdate', this.onPullRequestUpdate, this);
+    // Setup socket
+    socket.on('message', this.onPullRequestUpdate, this);
 
     return new Ember.RSVP.map(pullRequestPromises, (pullRequests) => {
       return {
@@ -27,6 +28,10 @@ export default Ember.Route.extend({
   },
 
   onPullRequestUpdate(event) {
-    console.log('onPullRequestUpdate ' + event.data);
+    const model = this.modelFor(this.routeName);
+    const pullRequests = [].concat(...model.mapBy('pullRequests'));
+
+
+    console.log('onMessage ' + event);
   }
 });
