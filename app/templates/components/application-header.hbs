@@ -1,0 +1,12 @@
+{{#bs-navbar class="navbar navbar-inverse"}}
+  <a class="navbar-brand" href="#">GitHub Fascia</a>
+  {{#if session.isAuthenticated}}
+    <p class="navbar-text">{{session.user.login}}</p>
+    {{#bs-navbar-content}}
+      {{#bs-navbar-nav}}
+        {{#bs-nav-item}}{{#link-to "pull-requests"}}Pull requests{{/link-to}}{{/bs-nav-item}}
+        {{#bs-nav-item}}{{#link-to "pull-requests"}}Releases{{/link-to}}{{/bs-nav-item}}
+      {{/bs-navbar-nav}}
+    {{/bs-navbar-content}}
+  {{/if}}
+{{/bs-navbar}}
