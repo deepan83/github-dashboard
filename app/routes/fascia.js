@@ -3,6 +3,7 @@ import AuthenticatedRouteMixin from 'ember-simple-auth/mixins/authenticated-rout
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   ajax: Ember.inject.service(),
+  session: Ember.inject.service(),
   model() {
     const ajax = this.get('ajax');
     return ajax
@@ -10,6 +11,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       .then((user) => {
         return ajax.request(`https://api.github.com/orgs/ConnectedHomes/members/${user.login}`)
           .then(() => {
+            this.get('session').set('user', user);
             return user;
           });
       })

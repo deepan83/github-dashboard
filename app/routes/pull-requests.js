@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   ajax: Ember.inject.service(),
-  flashMessages: Ember.inject.service(),
+  notify: Ember.inject.service(),
   socketIOService: Ember.inject.service('socket-io'),
 
   model() {
@@ -45,10 +45,12 @@ export default Ember.Route.extend({
     if (pullRequestsForRepository.length) {
       const matchingPullRequest = pullRequestsForRepository.findBy('number', pullRequestJSON.number);
 
-      if (matchingPullRequest) {
+      if (matchingPullRequest && pullRequestJSON.state === 'closed') {
         pullRequestsForRepository.removeObject(matchingPullRequest);
-      } else {
+        this.get('notify').info('Pull Request removed!');
+      } else if (pullRequestJSON.state === 'open') {
         pullRequestsForRepository.pushObject(pullRequestJSON);
+        this.get('notify').info('Pull Request added!');
       }
     }
   }
