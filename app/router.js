@@ -9,6 +9,7 @@ Router.map(function() {
   this.route('login');
   this.route('fascia');
   this.route('pull-requests');
+  this.route('releases');
 });
 
 export default Router;
