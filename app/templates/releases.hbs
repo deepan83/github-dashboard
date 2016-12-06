@@ -2,8 +2,8 @@
 
 <h2>Latest Releases</h2>
 
-{{#each model as |repo|}}
-  <h3>{{repo.name}}</h3>
+{{#each model as |releases|}}
+  <h3><a href={{releases.url}}>{{releases.url}}</a></h3>
   <table class="table table-striped releases">
     <thead>
       <tr>
@@ -14,14 +14,12 @@
       </tr>
     </thead>
     <tbody>
-      {{#each model as |releases|}}
       <tr>
         <td>{{releases.name}}</td>
         <td>{{releases.body}}</td>
         <td>{{releases.author.login}}</td>
         <td>{{releases.published_at}}</td>
       </tr>
-      {{/each}}
     </tbody>
   </table>
 {{/each}}
